@@ -173,9 +173,9 @@ server {
 upstream {{ $upstream_name }} {
 
 {{ range $container := $containers }}
-	{{ if $container.Env.PROXY_PORT }}
+	{{ if $container.Env.PROXY_HOST }}
 		{{ $port := coalesce $container.Env.VIRTUAL_PORT "80" }}
-		server {{ $container.Env.PROXY_PORT }}:{{ $port }};
+		server {{ $container.Env.PROXY_HOST }}:{{ $port }};
 	{{ else }}
 		{{ $addrLen := len $container.Addresses }}
 
